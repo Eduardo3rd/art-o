@@ -1,20 +1,32 @@
-# Art-o: Generative Art with p5.js
+# Generative Art Gallery
 
-This is a creative coding project using p5.js for generating art.
-
-## Setup
-
-1. Clone this repository
-2. Open `index.html` in a web browser
-   - For development, it's recommended to use a local server (e.g., using Visual Studio Code's Live Server extension)
+A collection of generative art pieces created with p5.js.
 
 ## Project Structure
 
-- `index.html` - Main HTML file
-- `style.css` - Styling for the canvas and page
-- `sketch.js` - p5.js sketch code where the art is generated
+```
+.
+├── index.html          # Main gallery page
+├── sketches/
+│   ├── common/        # Shared styles and utilities
+│   └── 01_flow_field/ # Individual sketches
+└── README.md
+```
 
-## Getting Started
+## Sketches
 
-The canvas is set up with an 800x800 pixel size. You can modify the dimensions in `sketch.js`.
-Write your generative art code in the `draw()` function in `sketch.js`. 
+1. **Flow Field Study** - A Tyler Hobbs-inspired piece using flow fields and organic curves
+
+## Running the Project
+
+1. Clone this repository
+2. Open `index.html` in a web browser
+   - For development, it's recommended to use a local server (e.g., Live Server in VS Code)
+3. Navigate through the gallery to view individual pieces
+
+## Adding New Sketches
+
+1. Create a new directory under `sketches/` with a numbered prefix
+2. Copy the basic structure from an existing sketch
+3. Update the main `index.html` to include the new piece
+4. Add documentation in the sketch's directory 

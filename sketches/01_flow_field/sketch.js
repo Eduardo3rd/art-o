@@ -8,9 +8,16 @@ const ALPHA = 30;
 
 let particles = [];
 let colors;
+let previewSaved = false;
 
 function setup() {
-    createCanvas(800, 800);
+    let canvas = createCanvas(800, 800);
+    canvas.parent('canvas-container');
+    initializeSketch();
+}
+
+function initializeSketch() {
+    // Reset canvas
     background(250, 248, 245);
     
     // Create a warm, earthy color palette
@@ -23,6 +30,7 @@ function setup() {
     ];
     
     // Initialize particles with random positions
+    particles = [];
     for (let i = 0; i < NUM_PARTICLES; i++) {
         particles.push({
             pos: createVector(random(width), random(height)),
@@ -33,6 +41,8 @@ function setup() {
     }
     
     noFill();
+    loop(); // Ensure the draw loop is running
+    previewSaved = false;
 }
 
 function draw() {
@@ -46,6 +56,45 @@ function draw() {
         // Add final touches
         addNoise();
         noLoop();
+    }
+}
+
+// Function to refresh the sketch
+function refreshSketch() {
+    initializeSketch();
+}
+
+// Function to update the gallery preview
+async function updateGallery() {
+    // Get the canvas data as base64
+    const imageData = canvas.toDataURL('image/png');
+    
+    try {
+        const response = await fetch('/save-preview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                imageData,
+                sketchPath: 'sketches/01_flow_field/preview.png'
+            })
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            // Add visual feedback
+            const updateButton = document.getElementById('update-gallery-button');
+            const originalText = updateButton.textContent;
+            updateButton.textContent = 'Gallery Updated!';
+            updateButton.style.background = '#45a049';
+            setTimeout(() => {
+                updateButton.textContent = originalText;
+                updateButton.style.background = '#2196F3';
+            }, 2000);
+        }
+    } catch (error) {
+        console.error('Failed to update gallery:', error);
     }
 }
 
