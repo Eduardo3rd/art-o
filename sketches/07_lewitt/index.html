@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeWitt</title>
+    <link rel="stylesheet" href="../common/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 20px;
+        }
+        
+        .control-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        #refresh-button {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        #refresh-button:hover {
+            background: #45a049;
+        }
+        
+        #update-gallery-button {
+            background: #2196F3;
+            color: white;
+        }
+        
+        #update-gallery-button:hover {
+            background: #1e88e5;
+        }
+        
+        .back-button {
+            background: #333;
+        }
+
+        .parameters {
+            width: 100%;
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .parameter-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        label {
+            margin-bottom: 5px;
+        }
+
+        .instruction {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="instruction" id="instruction">
+            <!-- Instruction text will be set by JavaScript -->
+        </div>
+        <div class="parameters">
+            <div class="parameter-group">
+                <label for="instruction-select">Wall Drawing</label>
+                <select id="instruction-select" onchange="updateParameters()">
+                    <option value="0">Wall Drawing #11 (1969)</option>
+                    <option value="1">Wall Drawing #46 (1970)</option>
+                    <option value="2">Wall Drawing #56 (1970)</option>
+                    <option value="3">Wall Drawing #797 (1995)</option>
+                    <option value="4">Colored Cascade (2024)</option>
+                    <option value="5">Wall Drawing #122 (1972)</option>
+                    <option value="6">Wall Drawing #85 (1971)</option>
+                    <option value="7">Wall Drawing #51 (1970)</option>
+                    <option value="8">Wall Drawing #273 (1975)</option>
+                    <option value="9">Wall Drawing #146 (1972)</option>
+                </select>
+            </div>
+            <div class="parameter-group">
+                <label for="grid">Grid Size</label>
+                <input type="range" id="grid" min="4" max="20" value="10" onchange="updateParameters()">
+            </div>
+            <div class="parameter-group">
+                <label for="spacing">Line Spacing</label>
+                <input type="range" id="spacing" min="1" max="10" value="5" onchange="updateParameters()">
+            </div>
+            <div class="parameter-group">
+                <label for="weight">Line Weight</label>
+                <input type="range" id="weight" min="1" max="5" value="2" onchange="updateParameters()">
+            </div>
+        </div>
+        <div id="canvas-container"></div>
+    </main>
+    <div class="controls">
+        <button id="refresh-button" class="control-button" onclick="refreshSketch()">Refresh</button>
+        <button id="update-gallery-button" class="control-button" onclick="updateGallery()">Update Gallery</button>
+        <a href="../../index.html" class="back-button control-button">← Back to Gallery</a>
+    </div>
+</body>
+</html> 
