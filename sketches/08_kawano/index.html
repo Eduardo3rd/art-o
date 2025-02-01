@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawano</title>
+    <link rel="stylesheet" href="../common/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 20px;
+        }
+        
+        .control-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        #refresh-button {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        #refresh-button:hover {
+            background: #45a049;
+        }
+        
+        #update-gallery-button {
+            background: #2196F3;
+            color: white;
+        }
+        
+        #update-gallery-button:hover {
+            background: #1e88e5;
+        }
+        
+        .back-button {
+            background: #333;
+        }
+
+        .parameters {
+            width: 100%;
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .parameter-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        label {
+            margin-bottom: 5px;
+        }
+
+        .instruction {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="instruction">
+            Digital art generator inspired by Hiroshi Kawano's pioneering computer art and color theory experiments.
+        </div>
+        <div class="parameters">
+            <div class="parameter-group">
+                <label for="pattern-select">Pattern Type</label>
+                <select id="pattern-select" onchange="updateParameters()">
+                    <option value="0">Grid Composition</option>
+                    <option value="1">Color Study</option>
+                    <option value="2">Geometric Pattern</option>
+                    <option value="3">Mathematical Color</option>
+                </select>
+            </div>
+            <div class="parameter-group">
+                <label for="resolution">Resolution</label>
+                <input type="range" id="resolution" min="5" max="30" value="15" onchange="updateParameters()">
+            </div>
+            <div class="parameter-group">
+                <label for="complexity">Complexity</label>
+                <input type="range" id="complexity" min="1" max="10" value="5" onchange="updateParameters()">
+            </div>
+            <div class="parameter-group">
+                <label for="color-scheme">Color Scheme</label>
+                <select id="color-scheme" onchange="updateParameters()">
+                    <option value="0">Primary RGB</option>
+                    <option value="1">Monochromatic</option>
+                    <option value="2">Complementary</option>
+                    <option value="3">Mathematical</option>
+                </select>
+            </div>
+        </div>
+        <div id="canvas-container"></div>
+        <div class="color-palette" id="color-palette">
+            <!-- Color boxes will be added by JavaScript -->
+        </div>
+    </main>
+    <div class="controls">
+        <button id="refresh-button" class="control-button" onclick="refreshSketch()">Refresh</button>
+        <button id="update-gallery-button" class="control-button" onclick="updateGallery()">Update Gallery</button>
+        <a href="../../index.html" class="back-button control-button">← Back to Gallery</a>
+    </div>
+</body>
+</html>
